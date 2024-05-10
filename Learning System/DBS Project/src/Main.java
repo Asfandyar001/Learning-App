@@ -25,7 +25,7 @@ public class Main {
 
         // Welcome Screen Image
         JLabel label1 = new JLabel();
-        ImageIcon Welcome = new ImageIcon("DBS Project\\Images\\Welcome Screen.png");
+        ImageIcon Welcome = new ImageIcon("Learning System\\DBS Project\\Images\\Welcome Screen.png");
         label1.setIcon(Welcome);
         // Adjust the size of the sun icon based on label size
         int labelWidth = 1080; // Example width
@@ -61,7 +61,7 @@ public class Main {
 
         // Admin Button
         JButton admin = new JButton();
-        ImageIcon adminimg = new ImageIcon("DBS Project\\Images\\png-transparent-computer-icons-icon-design-business-administration-admin-icon-hand-monochrome-silhouette-thumbnail-removebg-preview.png");
+        ImageIcon adminimg = new ImageIcon("Learning System\\DBS Project\\Images\\png-transparent-computer-icons-icon-design-business-administration-admin-icon-hand-monochrome-silhouette-thumbnail-removebg-preview.png");
         admin.setIcon(adminimg);
 
         // Adjust the size of the sun icon based on label size
@@ -122,7 +122,7 @@ public class Main {
 
         // StudentLogIn Image
         JLabel label1 = new JLabel();
-        ImageIcon studentLog = new ImageIcon("DBS Project\\Images\\StudentLogIn.png");
+        ImageIcon studentLog = new ImageIcon("Learning System\\DBS Project\\Images\\StudentLogIn.png");
         label1.setIcon(studentLog);
         
         int labelWidth = 1080; // Example width
@@ -213,7 +213,7 @@ public class Main {
 
          // Back Button
          JButton back = new JButton();
-         ImageIcon backimg = new ImageIcon("DBS Project\\Images\\Back.png");
+         ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
          back.setIcon(backimg);
  
          // Adjust the size of the back icon based on label size
@@ -264,7 +264,7 @@ public class Main {
 
         // ParentLogIn Image
         JLabel label1 = new JLabel();
-        ImageIcon reportimg = new ImageIcon("DBS Project\\Images\\Report_UI.png");
+        ImageIcon reportimg = new ImageIcon("Learning System\\DBS Project\\Images\\Report_UI.png");
         label1.setIcon(reportimg);
         
         int labelWidth = 1080; // Example width
@@ -275,7 +275,7 @@ public class Main {
 
         // Back Button
         JButton back = new JButton();
-        ImageIcon backimg = new ImageIcon("DBS Project\\Images\\Back.png");
+        ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
         back.setIcon(backimg);
 
         // Adjust the size of the back icon based on label size
@@ -318,7 +318,7 @@ public class Main {
 
         // ParentLogIn Image
         JLabel label1 = new JLabel();
-        ImageIcon parentLog = new ImageIcon("DBS Project\\Images\\ParentLogIn.png");
+        ImageIcon parentLog = new ImageIcon("Learning System\\DBS Project\\Images\\ParentLogIn.png");
         label1.setIcon(parentLog);
         
         int labelWidth = 1080; // Example width
@@ -446,7 +446,7 @@ public class Main {
 
          // Back Button
          JButton back = new JButton();
-         ImageIcon backimg = new ImageIcon("DBS Project\\Images\\Back.png");
+         ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
          back.setIcon(backimg);
  
          // Adjust the size of the back icon based on label size
@@ -495,7 +495,7 @@ public class Main {
 
         // AdminLogIn Image
         JLabel label1 = new JLabel();
-        ImageIcon lessonimg = new ImageIcon("DBS Project\\Images\\Lesson.png");
+        ImageIcon lessonimg = new ImageIcon("Learning System\\DBS Project\\Images\\Lesson.png");
         label1.setIcon(lessonimg);
         int labelWidth = 1070; // Example width
         int labelHeight = 680; // Example height
@@ -505,7 +505,7 @@ public class Main {
 
         // Exit Button
         JButton exit = new JButton();
-        ImageIcon exitimg = new ImageIcon("DBS Project\\Images\\Exit.png");
+        ImageIcon exitimg = new ImageIcon("Learning System\\DBS Project\\Images\\Exit.png");
         exit.setIcon(exitimg);
         int exitWidth = 75; // Example width
         int exitHeight = 75; // Example height
@@ -638,7 +638,7 @@ public class Main {
 
         // forgotPassword Image
         JLabel label1 = new JLabel();
-        ImageIcon forgot = new ImageIcon("DBS Project\\Images\\Forgot Password.png");
+        ImageIcon forgot = new ImageIcon("Learning System\\DBS Project\\Images\\Forgot Password.png");
         label1.setIcon(forgot);
         
         int labelWidth = 1080; // Example width
@@ -650,7 +650,7 @@ public class Main {
 
         // Back Button
         JButton back = new JButton();
-        ImageIcon backimg = new ImageIcon("DBS Project\\Images\\Back.png");
+        ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
         back.setIcon(backimg);
 
         // Adjust the size of the back icon based on label size
@@ -698,7 +698,7 @@ public class Main {
 
         // ParentLogIn Image
         JLabel label1 = new JLabel();
-        ImageIcon congratsimg = new ImageIcon("DBS Project\\Images\\Winning Screen.png");
+        ImageIcon congratsimg = new ImageIcon("Learning System\\DBS Project\\Images\\Winning Screen.png");
         label1.setIcon(congratsimg);
         
         int labelWidth = 1080; // Example width
@@ -741,7 +741,7 @@ public class Main {
 
         // AdminLogIn Image
         JLabel label1 = new JLabel();
-        ImageIcon AdminLog = new ImageIcon("DBS Project\\Images\\Admin Page.png");
+        ImageIcon AdminLog = new ImageIcon("Learning System\\DBS Project\\Images\\Admin Page.png");
         label1.setIcon(AdminLog);
         // Adjust the size of the sun icon based on label size
         int labelWidth = 1080; // Example width
@@ -754,7 +754,7 @@ public class Main {
 
         // Back Button
         JButton back = new JButton();
-        ImageIcon backimg = new ImageIcon("DBS Project\\Images\\Back.png");
+        ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
         back.setIcon(backimg);
 
         // Adjust the size of the back icon based on label size
