@@ -21,7 +21,14 @@ public class Main {
         welcome_frame.setTitle("Learning App"); // set frame title
         welcome_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         welcome_frame.setResizable(false); // disable frame resizing
-        welcome_frame.setLocation(250, 50);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - welcome_frame.getWidth()) / 2;
+        int centerY = (screenSize.height - welcome_frame.getHeight()) / 2;
+        // Set the frame's location
+        welcome_frame.setLocation(centerX, centerY);
+
 
         // Welcome Screen Image
         JLabel label1 = new JLabel();
@@ -118,7 +125,13 @@ public class Main {
         student_loin.setTitle("Learning App"); // set frame title
         student_loin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         student_loin.setResizable(false); // disable frame resizing
-        student_loin.setLocation(250, 50);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - student_loin.getWidth()) / 2;
+        int centerY = (screenSize.height - student_loin.getHeight()) / 2;
+        // Set the frame's location
+        student_loin.setLocation(centerX, centerY);
 
         // StudentLogIn Image
         JLabel label1 = new JLabel();
@@ -260,7 +273,13 @@ public class Main {
         report.setTitle("Learning App"); // set frame title
         report.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         report.setResizable(false); // disable frame resizing
-        report.setLocation(250, 50);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - report.getWidth()) / 2;
+        int centerY = (screenSize.height - report.getHeight()) / 2;
+        // Set the frame's location
+        report.setLocation(centerX, centerY);
 
         // ParentLogIn Image
         JLabel label1 = new JLabel();
@@ -314,7 +333,13 @@ public class Main {
         parent_login.setTitle("Learning App"); // set frame title
         parent_login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         parent_login.setResizable(false); // disable frame resizing
-        parent_login.setLocation(250, 50);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - parent_login.getWidth()) / 2;
+        int centerY = (screenSize.height - parent_login.getHeight()) / 2;
+        // Set the frame's location
+        parent_login.setLocation(centerX, centerY);
 
         // ParentLogIn Image
         JLabel label1 = new JLabel();
@@ -491,7 +516,13 @@ public class Main {
         lesson.setTitle("Learning App"); // set frame title
         lesson.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         lesson.setResizable(false); // disable frame resizing
-        lesson.setLocation(250, 50);
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - lesson.getWidth()) / 2;
+        int centerY = (screenSize.height - lesson.getHeight()) / 2;
+        // Set the frame's location
+        lesson.setLocation(centerX, centerY);
 
         // AdminLogIn Image
         JLabel label1 = new JLabel();
@@ -634,7 +665,13 @@ public class Main {
         forgotpassword.setTitle("Learning App"); // set frame title
         forgotpassword.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         forgotpassword.setResizable(false); // disable frame resizing
-        forgotpassword.setLocation(250, 50);
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - forgotpassword.getWidth()) / 2;
+        int centerY = (screenSize.height - forgotpassword.getHeight()) / 2;
+        // Set the frame's location
+        forgotpassword.setLocation(centerX, centerY);
 
         // forgotPassword Image
         JLabel label1 = new JLabel();
@@ -693,8 +730,14 @@ public class Main {
         congrats.setTitle("Learning App"); // set frame title
         congrats.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         congrats.setResizable(false); // disable frame resizing
-        congrats.setLocation(250, 50);
         congrats.setUndecorated(true);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - congrats.getWidth()) / 2;
+        int centerY = (screenSize.height - congrats.getHeight()) / 2;
+        // Set the frame's location
+        congrats.setLocation(centerX, centerY);
 
         // ParentLogIn Image
         JLabel label1 = new JLabel();
@@ -737,7 +780,13 @@ public class Main {
         admin_loin.setTitle("Learning App"); // set frame title
         admin_loin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         admin_loin.setResizable(false); // disable frame resizing
-        admin_loin.setLocation(250, 50);
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - admin_loin.getWidth()) / 2;
+        int centerY = (screenSize.height - admin_loin.getHeight()) / 2;
+        // Set the frame's location
+        admin_loin.setLocation(centerX, centerY);
 
         // AdminLogIn Image
         JLabel label1 = new JLabel();
@@ -881,6 +930,7 @@ public class Main {
         admin_loin.setVisible(true);
     }
 }
+
 class ButtonClickListener implements ActionListener {
     private int lessonid;
     private JFrame frame;
