@@ -125,6 +125,7 @@ public class Main {
         student_loin.setTitle("Learning App"); // set frame title
         student_loin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         student_loin.setResizable(false); // disable frame resizing
+        student_loin.setUndecorated(true);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // Calculate the center point
@@ -273,6 +274,7 @@ public class Main {
         report.setTitle("Learning App"); // set frame title
         report.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         report.setResizable(false); // disable frame resizing
+        report.setUndecorated(true);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // Calculate the center point
@@ -333,6 +335,7 @@ public class Main {
         parent_login.setTitle("Learning App"); // set frame title
         parent_login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         parent_login.setResizable(false); // disable frame resizing
+        parent_login.setUndecorated(true);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // Calculate the center point
@@ -516,6 +519,7 @@ public class Main {
         lesson.setTitle("Learning App"); // set frame title
         lesson.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         lesson.setResizable(false); // disable frame resizing
+        lesson.setUndecorated(true);
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // Calculate the center point
@@ -524,12 +528,12 @@ public class Main {
         // Set the frame's location
         lesson.setLocation(centerX, centerY);
 
-        // AdminLogIn Image
+        // Leeson Image
         JLabel label1 = new JLabel();
         ImageIcon lessonimg = new ImageIcon("Learning System\\DBS Project\\Images\\Lesson.png");
         label1.setIcon(lessonimg);
-        int labelWidth = 1070; // Example width
-        int labelHeight = 680; // Example height
+        int labelWidth = 1080; // Example width
+        int labelHeight = 720; // Example height
         ImageIcon scaledlesson = new ImageIcon(lessonimg.getImage().getScaledInstance(labelWidth, labelHeight, java.awt.Image.SCALE_SMOOTH));
         label1.setIcon(scaledlesson);
         label1.setBounds(0, 0, labelWidth, labelHeight);
@@ -665,6 +669,7 @@ public class Main {
         forgotpassword.setTitle("Learning App"); // set frame title
         forgotpassword.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         forgotpassword.setResizable(false); // disable frame resizing
+        forgotpassword.setUndecorated(true);
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // Calculate the center point
@@ -679,7 +684,7 @@ public class Main {
         label1.setIcon(forgot);
         
         int labelWidth = 1080; // Example width
-        int labelHeight = 690; // Example height
+        int labelHeight = 720; // Example height
         ImageIcon scaledforgot = new ImageIcon(forgot.getImage().getScaledInstance(labelWidth, labelHeight, java.awt.Image.SCALE_SMOOTH));
         label1.setIcon(scaledforgot);
         label1.setBounds(0, 0, labelWidth, labelHeight); // Set bounds for label1
@@ -731,6 +736,7 @@ public class Main {
         congrats.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         congrats.setResizable(false); // disable frame resizing
         congrats.setUndecorated(true);
+        congrats.setUndecorated(true);
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // Calculate the center point
@@ -780,6 +786,7 @@ public class Main {
         admin_loin.setTitle("Learning App"); // set frame title
         admin_loin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         admin_loin.setResizable(false); // disable frame resizing
+        admin_loin.setUndecorated(true);
         
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // Calculate the center point

@@ -8,7 +8,14 @@ public class content {
         frame.setTitle("Learning App"); // set frame title
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
         frame.setResizable(false); // disable frame resizing
-        frame.setLocationRelativeTo(null); // center the frame
+        frame.setUndecorated(true);
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - frame.getWidth()) / 2;
+        int centerY = (screenSize.height - frame.getHeight()) / 2;
+        // Set the frame's location
+        frame.setLocation(centerX, centerY);
 
         // top bar
         JLabel top = new JLabel();
@@ -20,7 +27,7 @@ public class content {
 
         // Back Button
         JButton back = new JButton();
-        ImageIcon backimg = new ImageIcon("DBS Project\\Images\\Back.png");
+        ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
         back.setIcon(backimg);
         int backWidth = 60; // Example width
         int adminHeight = 60; // Example height
@@ -39,7 +46,7 @@ public class content {
 
         // Audio Button
         JButton audio = new JButton();
-        ImageIcon audioimg = new ImageIcon("DBS Project\\Images\\Audio_Icon.png");
+        ImageIcon audioimg = new ImageIcon("Learning System\\DBS Project\\Images\\Audio_Icon.png");
         audio.setIcon(audioimg);
         int audioWidth = 60; // Example width
         int audioHeight = 60; // Example height
