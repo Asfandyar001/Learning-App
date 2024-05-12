@@ -11,9 +11,7 @@ public class Main {
     public static void main(String[] args)
     {
 
-       addUser();
-
-        MainScreen();
+       MainScreen();
        ReportGenerator rg=new ReportGenerator();
        rg.generateQuizReportForStudent(1);
     }
@@ -580,15 +578,25 @@ public class Main {
         String url = c.geturl();
         try {
             Connection conn = DriverManager.getConnection(url);
+
+            Statement stmt3 = conn.createStatement();
+            ResultSet rs3 = stmt3.executeQuery("Select Section from Student where [Student ID]="+s_Id);
+            String section = "";
+            if (rs3.next()) {
+                section = rs3.getString(1);
+            }
+            rs3.close();
+            stmt3.close();
+
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select Count([Lesson ID]) from Lesson");
+            ResultSet rs = stmt.executeQuery("select Count([Lesson ID]) from Lesson WHERE Section = '" + section + "'");
 
             if (rs.next()) {
                 count = rs.getInt(1);
             }
 
             Statement stmt2 = conn.createStatement();
-            ResultSet rs2 = stmt2.executeQuery("select * from Lesson");
+            ResultSet rs2 = stmt2.executeQuery("SELECT * FROM Lesson WHERE Section = '" + section + "'");
 
             while (rs2.next()) {
                 lessonid.add(rs2.getInt(1));
@@ -1215,7 +1223,7 @@ public class Main {
                     preparedStatement.close();
                     conn2.close();
 
-                    JOptionPane.showMessageDialog(addUser,"New Student Added.", "Success", JOptionPane.OK_OPTION);
+                    JOptionPane.showMessageDialog(addUser,"New Student Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
                 } catch (SQLException f) {
                     f.printStackTrace();
                 }
