@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.print.attribute.standard.PrinterMakeAndModel;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.sql.*;
@@ -9,10 +10,12 @@ import java.sql.*;
 public class Main {
     public static void main(String[] args)
     {
+
+       addUser();
+
         MainScreen();
        ReportGenerator rg=new ReportGenerator();
        rg.generateQuizReportForStudent(1);
-
     }
     
 
@@ -922,6 +925,7 @@ public class Main {
             if (isfound == true && AdminPassword.getText().equals(adminpass.get(i))) 
             {
                 admin_loin.dispose();
+                option_screen();
             } 
             else
             {
@@ -947,7 +951,309 @@ public class Main {
         admin_loin.setVisible(true);
     }
 
+
+    public static void option_screen()
+    {
+        JFrame option = new JFrame();
+        option.setSize(1080, 720); // set frame size
+        option.setTitle("Learning App"); // set frame title
+        option.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
+        option.setResizable(false); // disable frame resizing
+        option.setUndecorated(true);
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - option.getWidth()) / 2;
+        int centerY = (screenSize.height - option.getHeight()) / 2;
+        // Set the frame's location
+        option.setLocation(centerX, centerY);
+
+        // OptionScreen Image
+        JLabel label1 = new JLabel();
+        ImageIcon AdminLog = new ImageIcon("Learning System\\DBS Project\\Images\\Admin_Enter.png");
+        label1.setIcon(AdminLog);
+        // Adjust the size of the icon based on label size
+        int labelWidth = 1080; // Example width
+        int labelHeight = 720; // Example height
+        ImageIcon scaledAdminLog = new ImageIcon(AdminLog.getImage().getScaledInstance(labelWidth, labelHeight, java.awt.Image.SCALE_SMOOTH));
+        label1.setIcon(scaledAdminLog);
+        label1.setBounds(0, 0, labelWidth, labelHeight); // Set bounds for label2
+
+
+        // Back Button
+        JButton back = new JButton();
+        ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
+        back.setIcon(backimg);
+
+        // Adjust the size of the back icon based on label size
+        int backWidth = 75; // Example width
+        int adminHeight = 75; // Example height
+        ImageIcon scaledexit = new ImageIcon(backimg.getImage().getScaledInstance(backWidth, adminHeight, java.awt.Image.SCALE_SMOOTH));
+        back.setIcon(scaledexit);
+
+        back.setBounds(10, 10, backWidth, adminHeight);
+        back.setBorderPainted(false);
+        back.setBackground(new Color(13,31,51));
+        // Remove border
+        back.setBorderPainted(false);
+
+        // Set transparent background
+        back.setOpaque(false);
+        back.setContentAreaFilled(false);
+        back.setBorder(BorderFactory.createEmptyBorder());
+        back.addActionListener(e->{
+            option.dispose();
+            AdminLogIn();
+        });
+
+         // add Button
+        JButton addButton = new JButton();
+        addButton.setBounds(101,255,130,50);
+        addButton.setFocusable(false);
+        addButton.setOpaque(false);
+        addButton.setContentAreaFilled(false);
+        addButton.setBorderPainted(false);
+
+        addButton.addActionListener(e->{
+            option.dispose();
+            addUser();
+        });
+
+        JLayeredPane Panel_option = new JLayeredPane();
+        Panel_option.setBounds(0, 0, 1080, 720);
+
+        Panel_option.add(addButton);
+        Panel_option.add(back);
+        Panel_option.add(label1);
+
+        option.add(Panel_option);
+        option.setLayout(null);
+        option.setVisible(true);
+    }
+
+    public static void addUser()
+    {
+        JFrame addUser = new JFrame();
+        addUser.setSize(1080, 720); // set frame size
+        addUser.setTitle("Learning App"); // set frame title
+        addUser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
+        addUser.setResizable(false); // disable frame resizing
+        addUser.setUndecorated(true);
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - addUser.getWidth()) / 2;
+        int centerY = (screenSize.height - addUser.getHeight()) / 2;
+        // Set the frame's location
+        addUser.setLocation(centerX, centerY);
+
+        // OptionScreen Image
+        JLabel label1 = new JLabel();
+        ImageIcon useradd = new ImageIcon("Learning System\\DBS Project\\Images\\Add_User.png");
+        label1.setIcon(useradd);
+        // Adjust the size of the icon based on label size
+        int labelWidth = 1080; // Example width
+        int labelHeight = 720; // Example height
+        ImageIcon scaledAdminLog = new ImageIcon(useradd.getImage().getScaledInstance(labelWidth, labelHeight, java.awt.Image.SCALE_SMOOTH));
+        label1.setIcon(scaledAdminLog);
+        label1.setBounds(0, 0, labelWidth, labelHeight); // Set bounds for label2
+
+
+        // Back Button
+        JButton back = new JButton();
+        ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
+        back.setIcon(backimg);
+
+        // Adjust the size of the back icon based on label size
+        int backWidth = 75; // Example width
+        int adminHeight = 75; // Example height
+        ImageIcon scaledexit = new ImageIcon(backimg.getImage().getScaledInstance(backWidth, adminHeight, java.awt.Image.SCALE_SMOOTH));
+        back.setIcon(scaledexit);
+
+        back.setBounds(10, 10, backWidth, adminHeight);
+        back.setBorderPainted(false);
+        back.setBackground(new Color(13,31,51));
+        // Remove border
+        back.setBorderPainted(false);
+
+        // Set transparent background
+        back.setOpaque(false);
+        back.setContentAreaFilled(false);
+        back.setBorder(BorderFactory.createEmptyBorder());
+        back.addActionListener(e->{
+            addUser.dispose();
+            option_screen();
+        });
+
+
+        //Text Field of SudentId
+        JTextField StudentId = new JTextField();
+        StudentId.setPreferredSize(new Dimension(175,40));
+        StudentId.setFont(new Font("Inter",Font.BOLD,20));
+        StudentId.setForeground(new Color(0,0,0));
+        StudentId.setBounds(100, 265, 220, 40); // Adjusted position
+        StudentId.setBorder(null); // Remove border
+
+        //Text Field of SudentName
+        JTextField StudentName = new JTextField();
+        StudentName.setPreferredSize(new Dimension(175,40));
+        StudentName.setFont(new Font("Inter",Font.BOLD,20));
+        StudentName.setForeground(new Color(0,0,0));
+        StudentName.setBounds(431, 265, 220, 40); // Adjusted position
+        StudentName.setBorder(null); // Remove border
+
+        //Text Field of SudentPassword
+        JTextField StudentPass = new JTextField();
+        StudentPass.setPreferredSize(new Dimension(175,40));
+        StudentPass.setFont(new Font("Inter",Font.BOLD,20));
+        StudentPass.setForeground(new Color(0,0,0));
+        StudentPass.setBounds(762, 265, 220, 40); // Adjusted position
+        StudentPass.setBorder(null); // Remove border
+
+        //Text Field of SudentGuardian
+        JTextField StudentGuardian = new JTextField();
+        StudentGuardian.setPreferredSize(new Dimension(175,40));
+        StudentGuardian.setFont(new Font("Inter",Font.BOLD,20));
+        StudentGuardian.setForeground(new Color(0,0,0));
+        StudentGuardian.setBounds(431, 377, 220, 40); // Adjusted position
+        StudentGuardian.setBorder(null); // Remove border
+
+        //Text Field of SudentSection
+        JTextField StudentSection = new JTextField();
+        StudentSection.setPreferredSize(new Dimension(175,40));
+        StudentSection.setFont(new Font("Inter",Font.BOLD,20));
+        StudentSection.setForeground(new Color(0,0,0));
+        StudentSection.setBounds(100, 377, 220, 40); // Adjusted position
+        StudentSection.setBorder(null); // Remove border
+
+         // addStudent Button
+        JButton add_Student_Button = new JButton();
+        add_Student_Button.setBounds(810,370,125,45);
+        add_Student_Button.setFocusable(false);
+        add_Student_Button.setOpaque(false);
+        add_Student_Button.setContentAreaFilled(false);
+        add_Student_Button.setBorderPainted(false);
+
+        add_Student_Button.addActionListener(e->{
+            
+            if(StudentId.getText().isEmpty() || StudentName.getText().isEmpty() || StudentPass.getText().isEmpty() || StudentSection.getText().isEmpty() || StudentGuardian.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(addUser,"Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                DB c = new DB();
+                String url = c.geturl();
+                ArrayList<String> studentids = new ArrayList<>();
+                ArrayList<String> guardianids = new ArrayList<>();
+                try {
+                    Connection conn = DriverManager.getConnection(url);
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery("Select * from Student");
+        
+                    while (rs.next()) {
+                        studentids.add(rs.getString(1));
+                    }
+        
+                    rs.close();
+                    stmt.close();
     
+                    Statement stmt2 = conn.createStatement();
+                    ResultSet rs2 = stmt2.executeQuery("Select * from Guardian");
+                    while (rs2.next()) {
+                        guardianids.add(rs2.getString(1));
+                    }
+    
+                    rs2.close();
+                    stmt2.close();
+    
+                    conn.close();
+                } catch (SQLException f) {
+                    f.printStackTrace();
+                }
+
+                boolean found = false;
+                boolean found2 = false;
+
+                for(int i=0; i<studentids.size();i++)
+            {
+                if(studentids.get(i).equals(StudentId.getText()))
+                {
+                    found = true;
+                    break;
+                }
+            }
+            for(int i=0; i<guardianids.size();i++)
+            {
+                if(guardianids.get(i).equals(StudentGuardian.getText()))
+                {
+                    found2 = true;
+                    break;
+                }
+            }
+            if(found == true)
+            {
+                JOptionPane.showMessageDialog(addUser,"Student ID already exist.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if(found2 == false)
+            {
+                JOptionPane.showMessageDialog(addUser,"Guardian Does not Exist.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                try {
+                    Connection conn2 = DriverManager.getConnection(url);
+                    String sql = "insert into Student([Student ID],[Student Name],[Guardian ID],[Student Password],Section) values (?,?,?,?,?)";
+                    PreparedStatement preparedStatement = conn2.prepareStatement(sql);
+                    preparedStatement.setInt(1, Integer.parseInt(StudentId.getText())); // student_id
+                    preparedStatement.setString(2, StudentName.getText()); // student_name
+                    preparedStatement.setInt(3, Integer.parseInt(StudentGuardian.getText()));
+                    preparedStatement.setString(4, StudentPass.getText());
+                    preparedStatement.setString(5, StudentSection.getText());
+                    preparedStatement.executeUpdate();
+
+                    preparedStatement.close();
+                    conn2.close();
+
+                    JOptionPane.showMessageDialog(addUser,"New Student Added.", "Success", JOptionPane.OK_OPTION);
+                } catch (SQLException f) {
+                    f.printStackTrace();
+                }
+
+            }
+
+            }
+        });
+
+        // addStudent Button
+        JButton add_Parent_Button = new JButton();
+        add_Parent_Button.setBounds(810,645,125,45);
+        add_Parent_Button.setFocusable(false);
+        add_Parent_Button.setOpaque(false);
+        add_Parent_Button.setContentAreaFilled(false);
+        add_Parent_Button.setBorderPainted(false);
+
+        add_Parent_Button.addActionListener(e->{
+
+        });
+
+        JLayeredPane Panel_addUser = new JLayeredPane();
+        Panel_addUser.setBounds(0, 0, 1080, 720);
+
+        Panel_addUser.add(add_Parent_Button);
+        Panel_addUser.add(add_Student_Button);
+        Panel_addUser.add(StudentId);
+        Panel_addUser.add(StudentName);
+        Panel_addUser.add(StudentPass);
+        Panel_addUser.add(StudentGuardian);
+        Panel_addUser.add(StudentSection);
+        Panel_addUser.add(back);
+        Panel_addUser.add(label1);
+
+        addUser.add(Panel_addUser);
+        addUser.setLayout(null);
+        addUser.setVisible(true);
+    }
 }
 
 class ButtonClickListener implements ActionListener {
