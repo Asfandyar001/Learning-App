@@ -33,7 +33,8 @@ public class MCQQuiz extends JFrame {
         answers = new ArrayList<>();
         selectedAnswers = new ArrayList<>();
 
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=Learning_System;integratedSecurity=true;trustServerCertificate=true;";
+        DB c = new DB();
+        String url = c.geturl();
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();

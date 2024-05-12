@@ -174,7 +174,8 @@ public class Main {
         ArrayList<String> studentids = new ArrayList<>();
         ArrayList<String> studentpass = new ArrayList<>();
 
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=Learning_System;integratedSecurity=true;trustServerCertificate=true;";
+        DB c = new DB();
+        String url = c.geturl();
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
@@ -396,7 +397,8 @@ public class Main {
         boolean isfound = false;
         int j;
 
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=Learning_System;integratedSecurity=true;trustServerCertificate=true;";
+        DB c = new DB();
+        String url = c.geturl();
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
@@ -569,7 +571,8 @@ public class Main {
         ArrayList<Integer> color_b = new ArrayList<>();
         ArrayList<String> content = new ArrayList<>();
 
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=Learning_System;integratedSecurity=true;trustServerCertificate=true;";
+        DB c = new DB();
+        String url = c.geturl();
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
@@ -880,7 +883,8 @@ public class Main {
         ArrayList<String> adminids = new ArrayList<>();
         ArrayList<String> adminpass = new ArrayList<>();
 
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=Learning_System;integratedSecurity=true;trustServerCertificate=true;";
+        DB c = new DB();
+        String url = c.geturl();
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
