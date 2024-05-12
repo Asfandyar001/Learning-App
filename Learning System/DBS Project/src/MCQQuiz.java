@@ -13,6 +13,8 @@ public class MCQQuiz extends JFrame {
     private ButtonGroup buttonGroup;
     private JButton nextButton;
 
+    
+
     ArrayList<String> questions;
     ArrayList<String> opt_1;
     ArrayList<String> opt_2;
@@ -24,7 +26,7 @@ public class MCQQuiz extends JFrame {
 
     private int currentQuestionIndex = 0;
 
-    public MCQQuiz(int l_id,int cr, int cg, int cb) {
+    public MCQQuiz(int s_Id,int q_Id,int l_id,int cr, int cg, int cb) {
         questions = new ArrayList<>();
         opt_1 = new ArrayList<>();
         opt_2 = new ArrayList<>();
@@ -131,7 +133,7 @@ public class MCQQuiz extends JFrame {
                 if (currentQuestionIndex < questions.size()) {
                     updateQuestion();
                 } else {
-                    showResult();
+                    showResult(s_Id,q_Id);
                 }
             }
         });
@@ -171,7 +173,12 @@ public class MCQQuiz extends JFrame {
         buttonGroup.clearSelection();
     }
 
-    private void showResult() {
+    PreparedStatement pstmt=null;
+    DB c = new DB();
+     String url = c.geturl();
+    
+
+    private void showResult(int s_Id,int q_Id) {
         int score = 0;
         for (int i = 0; i < questions.size(); i++) {
             if (selectedAnswers.get(i).equals(answers.get(i))) {
@@ -183,6 +190,47 @@ public class MCQQuiz extends JFrame {
                 "Result", JOptionPane.INFORMATION_MESSAGE);
 
         this.dispose();
-        Main.Congrats();
+
+        Main.Congrats(s_Id);
+
+
+        
+        try(Connection conn = DriverManager.getConnection(url);) {
+            
+        
+        String sql="Insert into QuizResult(StudentId,QuizId,StudentMarks,TotalMarks) values(?,?,?,?) ";
+
+        pstmt=conn.prepareStatement(sql);
+        //q_Id ++;
+         pstmt.setInt(1,s_Id);
+         pstmt.setInt(2, q_Id);
+         pstmt.setInt(3, score);
+         pstmt.setInt(4,questions.size());
+         
+
+         int rowsAffected = pstmt.executeUpdate();
+            
+            // Check if data was inserted successfully
+            if (rowsAffected > 0) {
+                System.out.println("Data inserted successfully.");
+            } else {
+                System.out.println("Failed to insert data.");
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+    //     }finally {
+    //         // Close resources
+    //         try {
+    //             if (pstmt != null) pstmt.close();
+    //             if (conn != null) conn.close();
+    //         } catch (SQLException e) {
+    //             e.printStackTrace();
+    //         }
+    // }
+
+    
+
+}
     }
 }
+
