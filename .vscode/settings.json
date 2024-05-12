@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "e:\\SDA Drivers\\mssql-jdbc-12.6.1.jre11.jar"
+        "e:\\SDA Drivers\\mssql-jdbc-12.6.1.jre11.jar",
+        "c:\\Users\\Abdur Rafay\\Desktop\\mssql-jdbc-12.6.1.jre11.jar"
     ]
 }

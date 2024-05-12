@@ -2,7 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class content {
-    public content(int l_id,String heading, String con ,int cr, int cg, int cb) {
+    private static int q_Id=1;
+
+    public content(int s_Id,int l_id,String heading, String con ,int cr, int cg, int cb) {
+        
         JFrame frame = new JFrame();
         frame.setSize(1080, 720); // set frame size
         frame.setTitle("Learning App"); // set frame title
@@ -41,7 +44,7 @@ public class content {
         back.setContentAreaFilled(false);
         back.addActionListener(e->{
             frame.dispose();
-            Main.Lesson();
+            Main.Lesson(s_Id);
         });
 
         // Audio Button
@@ -60,6 +63,7 @@ public class content {
         audio.setContentAreaFilled(false);
 
         //Quiz Button
+        
         JButton Quiz = new JButton();
         Quiz.setText("<html><span style='font-size:20px;'>Take Quiz</span></html>");
         Quiz.setBounds(868,570,180,60);
@@ -68,7 +72,8 @@ public class content {
         Quiz.setFocusable(false);
         Quiz.addActionListener(e->{
             frame.dispose();
-            new MCQQuiz(l_id,cr,cg,cb);
+            
+            new MCQQuiz(s_Id,q_Id++,l_id,cr,cg,cb);
         });
 
         // Content Area with Scroll Pane
