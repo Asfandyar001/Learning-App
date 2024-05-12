@@ -4,17 +4,21 @@ import java.awt.event.ActionListener;
 
 import javax.print.attribute.standard.PrinterMakeAndModel;
 import javax.swing.*;
-
 import java.util.ArrayList;
-
 import java.sql.*;
 
 public class Main {
     public static void main(String[] args)
     {
+
        addUser();
+
+        MainScreen();
+       ReportGenerator rg=new ReportGenerator();
+       rg.generateQuizReportForStudent(1);
     }
     
+
     public static void MainScreen()
     {
         JFrame welcome_frame = new JFrame();
@@ -207,7 +211,7 @@ public class Main {
 
             if (isfound == true && StudentPassword.getText().equals(studentpass.get(i))) {
                 student_loin.dispose();
-                Lesson();
+                Lesson(Integer.parseInt(StudentId.getText()));
             } else {
                 // Show error message or handle incorrect login
                 JOptionPane.showMessageDialog(student_loin, "Incorrect Student ID or Password");
@@ -515,7 +519,7 @@ public class Main {
         parent_login.setVisible(true);
     }
 
-    public static void Lesson()
+    public static void Lesson(int s_Id)
     {
         JFrame lesson = new JFrame();
         lesson.setSize(1080, 720); // set frame size
@@ -631,7 +635,7 @@ public class Main {
             buttons[i].setBackground(new Color(color_r.get(i), color_g.get(i), color_b.get(i)));
             buttons[i].setBounds(0, i * 150, 598, 130); // Set the position and size of the button
             buttons[i].setFocusable(false);
-            buttons[i].addActionListener(new ButtonClickListener(lessonid.get(i),lesson,heading.get(i),content.get(i),color_r.get(i), color_g.get(i), color_b.get(i))); // Assign different action to each button
+            buttons[i].addActionListener(new ButtonClickListener(s_Id,lessonid.get(i),lesson,heading.get(i),content.get(i),color_r.get(i), color_g.get(i), color_b.get(i))); // Assign different action to each button
             buttonPanel.add(buttons[i]); // Add buttons to the panel
         }
 
@@ -664,6 +668,10 @@ public class Main {
         lesson.add(Panel_lesson);
         lesson.setLayout(null);
         lesson.setVisible(true);    
+
+        //
+
+        
     }
     
     public static void ForgotPassword()
@@ -732,7 +740,7 @@ public class Main {
         forgotpassword.setVisible(true);
     }
 
-    public static void Congrats()
+    public static void Congrats(int s_Id)
     {
         JFrame congrats = new JFrame();
         congrats.setSize(1080, 720); // set frame size
@@ -769,7 +777,7 @@ public class Main {
         back_to_home.setFocusable(false);
         back_to_home.addActionListener(e->{
             congrats.dispose();
-            Lesson();
+            Lesson(s_Id);
         });
 
         JLayeredPane Panel_congrats = new JLayeredPane();
@@ -942,6 +950,7 @@ public class Main {
         admin_loin.setLayout(null);
         admin_loin.setVisible(true);
     }
+
 
     public static void option_screen()
     {
@@ -1255,8 +1264,9 @@ class ButtonClickListener implements ActionListener {
     private int cr;
     private int cg;
     private int cb;
+    private int studentID;
 
-    public ButtonClickListener(int l_id, JFrame frame, String h,String c ,int r, int g, int b) {
+    public ButtonClickListener(int s_Id,int l_id, JFrame frame, String h,String c ,int r, int g, int b) {
         lessonid = l_id;
         this.frame = frame;
         Heading = h;
@@ -1264,12 +1274,14 @@ class ButtonClickListener implements ActionListener {
         cr = r;
         cg = g;
         cb = b;
+        studentID=s_Id;
+        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         // Action to perform when the button is clicked
         frame.dispose();
-        new content(lessonid,Heading,content,cr,cg,cb);
+        new content(studentID,lessonid,Heading,content,cr,cg,cb);
     }
 }
