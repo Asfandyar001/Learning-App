@@ -10,7 +10,6 @@ import java.sql.*;
 public class Main {
     public static void main(String[] args)
     {
-
        MainScreen();
        ReportGenerator rg=new ReportGenerator();
        rg.generateQuizReportForStudent(1);
@@ -978,7 +977,7 @@ public class Main {
 
         // OptionScreen Image
         JLabel label1 = new JLabel();
-        ImageIcon AdminLog = new ImageIcon("Learning System\\DBS Project\\Images\\Admin_Enter.png");
+        ImageIcon AdminLog = new ImageIcon("Learning System\\DBS Project\\Images\\Admin_Enter3.png");
         label1.setIcon(AdminLog);
         // Adjust the size of the icon based on label size
         int labelWidth = 1080; // Example width
@@ -1385,7 +1384,7 @@ public class Main {
 
         // OptionScreen Image
         JLabel label1 = new JLabel();
-        ImageIcon useradd = new ImageIcon("Learning System\\DBS Project\\Images\\Add Lesson.png");
+        ImageIcon useradd = new ImageIcon("Learning System\\DBS Project\\Images\\Add Lesson1.png");
         label1.setIcon(useradd);
         // Adjust the size of the icon based on label size
         int labelWidth = 1080; // Example width
