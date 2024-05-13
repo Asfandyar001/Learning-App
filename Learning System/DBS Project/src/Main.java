@@ -10,7 +10,8 @@ import java.sql.*;
 public class Main {
     public static void main(String[] args)
     {
-       MainScreen();
+        option_screen();
+        //MainScreen();
     //    lessonSearchPage();
     //    ReportGenerator rg=new ReportGenerator();
     //    rg.generateQuizReportForStudent(1);
@@ -1041,9 +1042,23 @@ public class Main {
             addLesson();
         });
 
+        //add Quiz
+        JButton addQuiz = new JButton();
+        addQuiz.setBounds(101,625,130,50);
+        addQuiz.setFocusable(false);
+        addQuiz.setOpaque(false);
+        addQuiz.setContentAreaFilled(false);
+        addQuiz.setBorderPainted(false);
+
+        addQuiz.addActionListener(e->{
+            option.dispose();
+            lessonSearchPage();
+        });
+
         JLayeredPane Panel_option = new JLayeredPane();
         Panel_option.setBounds(0, 0, 1080, 720);
 
+        Panel_option.add(addQuiz);
         Panel_option.add(addButton);
         Panel_option.add(addLessonButton);
         Panel_option.add(back);
@@ -1596,11 +1611,25 @@ public class Main {
         addUser.setVisible(true);
     }
 
-    public static void lessonSearchPage() {
-        JFrame searchFrame = new JFrame();
+    public static void lessonSearchPage()
+    {
+        JFrame search = new JFrame();
+        search.setSize(1080, 720); // set frame size
+        search.setTitle("Learning App"); // set frame title
+        search.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
+        search.setResizable(false); // disable frame resizing
+        search.setUndecorated(true);
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - search.getWidth()) / 2;
+        int centerY = (screenSize.height - search.getHeight()) / 2;
+        // Set the frame's location
+        search.setLocation(centerX, centerY);
+
         // OptionScreen Image
         JLabel label1 = new JLabel();
-        ImageIcon useradd = new ImageIcon("Learning System\\DBS Project\\Images\\Search_Lesson.png");
+        ImageIcon useradd = new ImageIcon("Learning System\\DBS Project\\Images\\searchLesson.png");
         label1.setIcon(useradd);
         // Adjust the size of the icon based on label size
         int labelWidth = 1080; // Example width
@@ -1608,72 +1637,124 @@ public class Main {
         ImageIcon scaledAdminLog = new ImageIcon(useradd.getImage().getScaledInstance(labelWidth, labelHeight, java.awt.Image.SCALE_SMOOTH));
         label1.setIcon(scaledAdminLog);
         label1.setBounds(0, 0, labelWidth, labelHeight); // Set bounds for label2
-        searchFrame.setSize(1080, 720);
-        searchFrame.setTitle("Lesson Search");
-        searchFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        searchFrame.setResizable(false);
-        searchFrame.setLocationRelativeTo(null); // Center the frame on the screen
-    
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
-    
-        JLabel label = new JLabel("Enter Lesson ID:");
-        label.setBounds(50, 50, 150, 30);
-        JTextField lessonIdField = new JTextField();
-        lessonIdField.setBounds(400, 310, 280, 46);
-    
-        JButton searchButton = new JButton("Search");
-        searchButton.setBounds(250, 319, 150, 30);
-        searchButton.addActionListener(e -> {
-            String lessonId = lessonIdField.getText();
-            if (!lessonId.isEmpty()) {
-                if (searchLessonId(Integer.parseInt(lessonId))) {
-                    addQuiz(Integer.parseInt(lessonId)); // Navigate to addQuiz page
-                    searchFrame.dispose(); // Close the search frame
-                } else {
-                    JOptionPane.showMessageDialog(searchFrame, "Lesson ID not found!", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(searchFrame, "Please enter a Lesson ID.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        });
-    
-        panel.add(label1);
-        panel.add(lessonIdField);
-        panel.add(searchButton);
-    
-        searchFrame.add(panel);
-        searchFrame.setVisible(true);
-    }
-    
-    private static boolean searchLessonId(int lessonId) {
-        DB c = new DB();
-        String url = c.geturl();
-    
-        try {
-            Connection conn = DriverManager.getConnection(url);
-            PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(*) FROM Lesson WHERE [Lesson ID] = ?");
-            pstmt.setInt(1, lessonId);
-            ResultSet rs = pstmt.executeQuery();
-    
-            if (rs.next()) {
-                int count = rs.getInt(1);
-                return count > 0; // Returns true if lesson ID exists in the database
-            }
-    
-            rs.close();
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    
-        return false; // Return false if any exception occurs or lesson ID not found
-    }
-    
-    
-    
 
+
+        // Back Button
+        JButton back = new JButton();
+        ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
+        back.setIcon(backimg);
+
+        // Adjust the size of the back icon based on label size
+        int backWidth = 75; // Example width
+        int adminHeight = 75; // Example height
+        ImageIcon scaledexit = new ImageIcon(backimg.getImage().getScaledInstance(backWidth, adminHeight, java.awt.Image.SCALE_SMOOTH));
+        back.setIcon(scaledexit);
+
+        back.setBounds(10, 10, backWidth, adminHeight);
+        back.setBorderPainted(false);
+        back.setBackground(new Color(13,31,51));
+        // Remove border
+        back.setBorderPainted(false);
+
+        // Set transparent background
+        back.setOpaque(false);
+        back.setContentAreaFilled(false);
+        back.setBorder(BorderFactory.createEmptyBorder());
+        back.addActionListener(e->{
+            search.dispose();
+            option_screen();
+        });
+
+        //Text Field of LessonName
+        JTextField LessonName = new JTextField();
+        LessonName.setPreferredSize(new Dimension(175,40));
+        LessonName.setFont(new Font("Inter",Font.BOLD,20));
+        LessonName.setForeground(new Color(0,0,0));
+        LessonName.setBounds(405, 315, 270, 40); // Adjusted position
+        LessonName.setBorder(null); // Remove border
+
+        // Search Button
+        JButton hello = new JButton();
+        hello.setBounds(480,400,125,45);
+        hello.setFocusable(false);
+        hello.setOpaque(false);
+        hello.setContentAreaFilled(false);
+        hello.setBorderPainted(false);
+
+        hello.addActionListener(e->{
+            DB c = new DB();
+                String url = c.geturl();
+                ArrayList<String> lessons = new ArrayList<>();
+                try {
+                    Connection conn = DriverManager.getConnection(url);
+                    Statement stmt = conn.createStatement();
+                    ResultSet rs = stmt.executeQuery("Select * from Lesson");
+        
+                    while (rs.next()) {
+                        lessons.add(rs.getString(2));
+                    }
+        
+                    rs.close();
+                    stmt.close();
+    
+                    conn.close();
+                } catch (SQLException f) {
+                    f.printStackTrace();
+                }
+
+                boolean found = false;
+                for(int i=0 ; i<lessons.size();i++)
+                {
+                    if(lessons.get(i).equals(LessonName.getText()))
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                
+                if(found == false)
+                {
+                    JOptionPane.showMessageDialog(search,"Could not Find Required Lesson.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    int id = 0;
+                try {
+                    Connection conn2 = DriverManager.getConnection(url);
+                    Statement stmt2 = conn2.createStatement();
+                    ResultSet rs2 = stmt2.executeQuery("select [Lesson ID] from Lesson where [Lesson Name] = " + LessonName.getText());
+        
+                    if(rs2.next())
+                    {
+                        id = rs2.getInt(1);
+                    }
+        
+                    rs2.close();
+                    stmt2.close();
+    
+                    conn2.close();
+
+                    search.dispose();
+                    addQuiz(id);
+                } catch (SQLException f) {
+                    f.printStackTrace();
+                }
+                }
+        });
+        
+        JLayeredPane Panel_addUser = new JLayeredPane();
+        Panel_addUser.setBounds(0, 0, 1080, 720);
+
+        Panel_addUser.add(hello);
+        Panel_addUser.add(LessonName);
+        Panel_addUser.add(back);
+        Panel_addUser.add(label1);
+
+        search.add(Panel_addUser);
+        search.setLayout(null);
+        search.setVisible(true);
+    }
+    
 public static void addQuiz(int lessonid) {
     JFrame addQuizFrame = new JFrame();
     addQuizFrame.setSize(1080, 720);
@@ -1709,92 +1790,86 @@ public static void addQuiz(int lessonid) {
     backButton.setBorder(BorderFactory.createEmptyBorder());
     backButton.addActionListener(e -> {
         addQuizFrame.dispose();
-        option_screen(); // Go back to the option screen
+        lessonSearchPage();
     });
-
-    JTextField lessonIdField = new JTextField();
-    lessonIdField.setPreferredSize(new Dimension(175, 40));
-    lessonIdField.setFont(new Font("Inter", Font.BOLD, 20));
-    lessonIdField.setForeground(Color.BLACK);
-    lessonIdField.setBounds(100, 265, 220, 40);
-    lessonIdField.setBorder(null);
 
     JTextField questionField = new JTextField();
     questionField.setPreferredSize(new Dimension(175, 40));
     questionField.setFont(new Font("Inter", Font.BOLD, 20));
     questionField.setForeground(Color.BLACK);
-    questionField.setBounds(600, 900, 220, 40);
+    questionField.setBounds(30, 245, 1000, 40);
     questionField.setBorder(null);
 
     JTextField choice1Field = new JTextField();
     choice1Field.setPreferredSize(new Dimension(175, 40));
     choice1Field.setFont(new Font("Inter", Font.BOLD, 20));
     choice1Field.setForeground(Color.BLACK);
-    choice1Field.setBounds(100, 355, 220, 40);
+    choice1Field.setBounds(30, 360, 270, 40);
     choice1Field.setBorder(null);
 
     JTextField choice2Field = new JTextField();
     choice2Field.setPreferredSize(new Dimension(175, 40));
     choice2Field.setFont(new Font("Inter", Font.BOLD, 20));
     choice2Field.setForeground(Color.BLACK);
-    choice2Field.setBounds(431, 377, 220, 40);
+    choice2Field.setBounds(410, 360, 250, 40);
     choice2Field.setBorder(null);
 
     JTextField choice3Field = new JTextField();
     choice3Field.setPreferredSize(new Dimension(175, 40));
     choice3Field.setFont(new Font("Inter", Font.BOLD, 20));
     choice3Field.setForeground(Color.BLACK);
-    choice3Field.setBounds(762, 1065, 220, 40);
+    choice3Field.setBounds(30, 463, 270, 40);
     choice3Field.setBorder(null);
 
     JTextField choice4Field = new JTextField();
     choice4Field.setPreferredSize(new Dimension(175, 40));
     choice4Field.setFont(new Font("Inter", Font.BOLD, 20));
     choice4Field.setForeground(Color.BLACK);
-    choice4Field.setBounds(50, 50, 220, 40);
+    choice4Field.setBounds(410, 463, 250, 40);
     choice4Field.setBorder(null);
 
     JTextField correctAnswerField = new JTextField();
     correctAnswerField.setPreferredSize(new Dimension(175, 40));
     correctAnswerField.setFont(new Font("Inter", Font.BOLD, 20));
     correctAnswerField.setForeground(Color.BLACK);
-    correctAnswerField.setBounds(431, 489, 220, 40);
+    correctAnswerField.setBounds(780, 360, 250, 40);
     correctAnswerField.setBorder(null);
 
     JButton addQuizButton = new JButton();
-    addQuizButton.setBounds(810, 370, 125, 45);
+    addQuizButton.setBounds(920, 535, 125, 45);
     addQuizButton.setFocusable(false);
     addQuizButton.setOpaque(false);
     addQuizButton.setContentAreaFilled(false);
     addQuizButton.setBorderPainted(false);
     addQuizButton.addActionListener(e -> {
-        // Insert quiz into database
-        String lessonId = lessonIdField.getText();
-        String question = questionField.getText();
-        String choice1 = choice1Field.getText();
-        String choice2 = choice2Field.getText();
-        String choice3 = choice3Field.getText();
-        String choice4 = choice4Field.getText();
-        String correctAnswer = correctAnswerField.getText();
         
-        if (lessonId.isEmpty() || question.isEmpty() || choice1.isEmpty() || choice2.isEmpty() || choice3.isEmpty() || choice4.isEmpty() || correctAnswer.isEmpty()) {
+        if (questionField.getText().isEmpty() || choice1Field.getText().isEmpty() || choice2Field.getText().isEmpty() || choice3Field.getText().isEmpty() || choice4Field.getText().isEmpty() || correctAnswerField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(addQuizFrame, "Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
-                // Establish connection
                 DB c = new DB();
                 String url = c.geturl();
                 Connection conn = DriverManager.getConnection(url);
+
+                Statement stmtcount = conn.createStatement();
+                ResultSet res = stmtcount.executeQuery("select Count(*) from Quiz");
+
+                int count=0;
+                if(res.next())
+                {
+                    count = res.getInt(1);
+                }
                 // Prepare SQL statement
-                String sql = "INSERT INTO Quiz ([Lesson ID], Question, [Choice 1], [Choice 2], [Choice 3], [Choice 4], [Correct Answer]) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String sql = "insert into Quiz([Quiz ID],[Lesson ID],Question,[Choice 1],[Choice 2],[Choice 3],[Choice 4],[Correct Answer]) values (?,?,?,?,?,?,?,?)";
                 PreparedStatement statement = conn.prepareStatement(sql);
-                statement.setInt(1, Integer.parseInt(lessonId));
-                statement.setString(2, question);
-                statement.setString(3, choice1);
-                statement.setString(4, choice2);
-                statement.setString(5, choice3);
-                statement.setString(6, choice4);
-                statement.setString(7, correctAnswer);
+                statement.setInt(1, count);
+                statement.setInt(2, lessonid);
+                statement.setString(3, questionField.getText());
+                statement.setString(4, choice1Field.getText());
+                statement.setString(5, choice2Field.getText());
+                statement.setString(6, choice3Field.getText());
+                statement.setString(7, choice4Field.getText());
+                statement.setString(8, correctAnswerField.getText());
 
                 // Execute statement
                 statement.executeUpdate();
@@ -1822,7 +1897,6 @@ public static void addQuiz(int lessonid) {
     panelAddQuiz.add(choice2Field);
     panelAddQuiz.add(choice1Field);
     panelAddQuiz.add(questionField);
-    panelAddQuiz.add(lessonIdField);
     panelAddQuiz.add(backButton);
     panelAddQuiz.add(backgroundLabel);
 
