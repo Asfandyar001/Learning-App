@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args)
     {
 
-       MainScreen();
+       addUser();
        ReportGenerator rg=new ReportGenerator();
        rg.generateQuizReportForStudent(1);
     }
@@ -1233,7 +1233,32 @@ public class Main {
             }
         });
 
-        // addStudent Button
+
+        //Text Field of GuardianId
+        JTextField GuardianId = new JTextField();
+        GuardianId.setPreferredSize(new Dimension(175,40));
+        GuardianId.setFont(new Font("Inter",Font.BOLD,20));
+        GuardianId.setForeground(new Color(0,0,0));
+        GuardianId.setBounds(105, 550, 220, 40); // Adjusted position
+        GuardianId.setBorder(null); // Remove border
+
+        //Text Field of GuardianName
+        JTextField GuardianName = new JTextField();
+        GuardianName.setPreferredSize(new Dimension(175,40));
+        GuardianName.setFont(new Font("Inter",Font.BOLD,20));
+        GuardianName.setForeground(new Color(0,0,0));
+        GuardianName.setBounds(437, 550, 220, 40); // Adjusted position
+        GuardianName.setBorder(null); // Remove border
+
+        //Text Field of GuardianPassword
+        JTextField GuardianPass = new JTextField();
+        GuardianPass.setPreferredSize(new Dimension(175,40));
+        GuardianPass.setFont(new Font("Inter",Font.BOLD,20));
+        GuardianPass.setForeground(new Color(0,0,0));
+        GuardianPass.setBounds(104, 655, 220, 40); // Adjusted position
+        GuardianPass.setBorder(null); // Remove border
+        
+        // addParent Button
         JButton add_Parent_Button = new JButton();
         add_Parent_Button.setBounds(810,645,125,45);
         add_Parent_Button.setFocusable(false);
@@ -1242,7 +1267,69 @@ public class Main {
         add_Parent_Button.setBorderPainted(false);
 
         add_Parent_Button.addActionListener(e->{
+            if(GuardianId.getText().isEmpty() || GuardianName.getText().isEmpty() || GuardianPass.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(addUser,"Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                DB c = new DB();
+                String url = c.geturl();
+                ArrayList<String> guardianids = new ArrayList<>();
+                try {
+                    Connection conn = DriverManager.getConnection(url);
+    
+                    Statement stmt2 = conn.createStatement();
+                    ResultSet rs2 = stmt2.executeQuery("Select * from Guardian");
+                    while (rs2.next()) {
+                        guardianids.add(rs2.getString(1));
+                    }
+    
+                    rs2.close();
+                    stmt2.close();
+    
+                    conn.close();
+                } catch (SQLException f) {
+                    f.printStackTrace();
+                }
 
+                boolean found2 = false;
+
+            for(int i=0; i<guardianids.size();i++)
+            {
+                if(guardianids.get(i).equals(GuardianId.getText()))
+                {
+                    found2 = true;
+                    break;
+                }
+            }
+            
+            if(found2 == true)
+            {
+                JOptionPane.showMessageDialog(addUser,"Guardian ID already Exist.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                try {
+                    Connection conn2 = DriverManager.getConnection(url);
+                    String sql = "insert into Guardian([Guardian ID],[Guardian Name],[Password]) values (?,?,?)";
+                    PreparedStatement preparedStatement = conn2.prepareStatement(sql);
+                    preparedStatement.setInt(1, Integer.parseInt(GuardianId.getText()));
+                    preparedStatement.setString(2, GuardianName.getText());
+                    preparedStatement.setString(3, GuardianPass.getText());
+                    preparedStatement.executeUpdate();
+
+                    preparedStatement.close();
+                    conn2.close();
+
+                    JOptionPane.showMessageDialog(addUser,"New Guardian Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } catch (SQLException f) {
+                    f.printStackTrace();
+                }
+
+            }
+
+            }
         });
 
         JLayeredPane Panel_addUser = new JLayeredPane();
@@ -1255,6 +1342,9 @@ public class Main {
         Panel_addUser.add(StudentPass);
         Panel_addUser.add(StudentGuardian);
         Panel_addUser.add(StudentSection);
+        Panel_addUser.add(GuardianId);
+        Panel_addUser.add(GuardianName);
+        Panel_addUser.add(GuardianPass);
         Panel_addUser.add(back);
         Panel_addUser.add(label1);
 
