@@ -11,11 +11,7 @@ public class Main {
     public static void main(String[] args)
     {
 
-       //MainScreen();
-       Report(1);
-        option_screen();
-        //MainScreen();
-    //    lessonSearchPage();
+       MainScreen();
     //    ReportGenerator rg=new ReportGenerator();
     //    rg.generateQuizReportForStudent(1);
     }
@@ -664,7 +660,7 @@ public class Main {
 
         //Text Rewards
         JLabel trewards = new JLabel();
-        String rewards_text = "3 / "+ count;
+        String rewards_text = "1 / "+ count;
         trewards.setText(rewards_text);
         trewards.setForeground(new Color(0,0,0)); // set font color
         trewards.setFont(new Font("Wendy One",Font.BOLD,40)); // set font style
