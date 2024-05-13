@@ -11,7 +11,8 @@ public class Main {
     public static void main(String[] args)
     {
 
-       MainScreen();
+       //MainScreen();
+       Report(1);
     //    lessonSearchPage();
     //    ReportGenerator rg=new ReportGenerator();
     //    rg.generateQuizReportForStudent(1);
@@ -272,7 +273,7 @@ public class Main {
         student_loin.setVisible(true);
     }
 
-    public static void Report()
+    public static void Report(int studentId)
     {
         JFrame report = new JFrame();
         report.setSize(1080, 720); // set frame size
@@ -322,13 +323,52 @@ public class Main {
         back.setContentAreaFilled(false);
         back.setBorder(BorderFactory.createEmptyBorder());
 
+
+        // Fetch and display the quiz report for the given student ID
+    JTextArea reportArea = new JTextArea();
+    reportArea.setFont(new Font("Arial", Font.PLAIN, 16));
+    reportArea.setEditable(false);
+    reportArea.setLineWrap(true);
+    reportArea.setWrapStyleWord(true);
+
+    try {
+        DB c = new DB();
+        String url = c.geturl();
+        Connection conn = DriverManager.getConnection(url);
+        String query ="SELECT StudentMarks, TotalMarks FROM QuizResult WHERE StudentID = "+ studentId;
+        Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+        // Append quiz report data to the text area
+        while (rs.next()) {
+            //String quizDate = rs.getString("QuizDate");
+            int score = rs.getInt("StudentMarks");
+            int total=rs.getInt("TotalMarks");
+            reportArea.append("Total Marks " + total + ", Student Marks: " + score + "\n");
+        }
+
+        rs.close();
+        stmt.close();
+        conn.close();
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(report, "Failed to fetch quiz report.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+
+    JScrollPane scrollPane = new JScrollPane(reportArea);
+    scrollPane.setBounds(150, 150, 800, 400);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         JLayeredPane Panel_report = new JLayeredPane();
         Panel_report.setBounds(0, 0, 1080, 720);
+        //Panel_report.add(reportArea);
 
         Panel_report.add(back);
         Panel_report.add(label1);
+        Panel_report.add(scrollPane);
 
         report.add(Panel_report);
+        
         report.setLayout(null);
         report.setVisible(true); 
     }
@@ -458,7 +498,7 @@ public class Main {
 
             if (isfound == true) {
                 parent_login.dispose();
-                Report();
+                Report(Integer.parseInt(parentId.getText()));
             } else {
                 // Show error message or handle incorrect login
                 JOptionPane.showMessageDialog(parent_login, "Incorrect Parent ID or Password or Student ID");
@@ -517,6 +557,8 @@ public class Main {
         parent_login.setLayout(null);
         parent_login.setVisible(true);
     }
+    
+    
 
     public static void Lesson(int s_Id)
     {
