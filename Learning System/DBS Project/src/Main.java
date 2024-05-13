@@ -10,10 +10,7 @@ import java.sql.*;
 public class Main {
     public static void main(String[] args)
     {
-
        MainScreen();
-    //    ReportGenerator rg=new ReportGenerator();
-    //    rg.generateQuizReportForStudent(1);
     }
     
 
@@ -1730,10 +1727,10 @@ public class Main {
                 try {
                     Connection conn = DriverManager.getConnection(url);
                     Statement stmt = conn.createStatement();
-                    ResultSet rs = stmt.executeQuery("Select * from Lesson");
+                    ResultSet rs = stmt.executeQuery("Select [Lesson Name] from Lesson");
         
                     while (rs.next()) {
-                        lessons.add(rs.getString(2));
+                        lessons.add(rs.getString(1));
                     }
         
                     rs.close();
@@ -1745,7 +1742,8 @@ public class Main {
                 }
 
                 boolean found = false;
-                for(int i=0 ; i<lessons.size();i++)
+                int i=0;
+                for(i=0 ; i<lessons.size();i++)
                 {
                     if(lessons.get(i).equals(LessonName.getText()))
                     {
@@ -1764,7 +1762,7 @@ public class Main {
                 try {
                     Connection conn2 = DriverManager.getConnection(url);
                     Statement stmt2 = conn2.createStatement();
-                    ResultSet rs2 = stmt2.executeQuery("select [Lesson ID] from Lesson where [Lesson Name] = " + LessonName.getText());
+                    ResultSet rs2 = stmt2.executeQuery("select [Lesson ID] from Lesson where [Lesson Name] = '" + lessons.get(i) + "'");
         
                     if(rs2.next())
                     {
@@ -1904,7 +1902,7 @@ public static void addQuiz(int lessonid) {
                 // Prepare SQL statement
                 String sql = "insert into Quiz([Quiz ID],[Lesson ID],Question,[Choice 1],[Choice 2],[Choice 3],[Choice 4],[Correct Answer]) values (?,?,?,?,?,?,?,?)";
                 PreparedStatement statement = conn.prepareStatement(sql);
-                statement.setInt(1, count);
+                statement.setInt(1, count+1);
                 statement.setInt(2, lessonid);
                 statement.setString(3, questionField.getText());
                 statement.setString(4, choice1Field.getText());
