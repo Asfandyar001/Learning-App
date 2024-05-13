@@ -328,6 +328,8 @@ public class Main {
     reportArea.setEditable(false);
     reportArea.setLineWrap(true);
     reportArea.setWrapStyleWord(true);
+    reportArea.setBounds(200, 300, 100, 100);
+    reportArea.setBackground(Color.pink);
 
     try {
         DB c = new DB();
@@ -355,15 +357,15 @@ public class Main {
 
 
     JScrollPane scrollPane = new JScrollPane(reportArea);
-    scrollPane.setBounds(150, 150, 800, 400);
+    scrollPane.setBounds(170, 230, 800, 400);
     scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         JLayeredPane Panel_report = new JLayeredPane();
         Panel_report.setBounds(0, 0, 1080, 720);
         //Panel_report.add(reportArea);
 
+        Panel_report.add(scrollPane);
         Panel_report.add(back);
         Panel_report.add(label1);
-        Panel_report.add(scrollPane);
 
         report.add(Panel_report);
         

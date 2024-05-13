@@ -28,25 +28,6 @@ public class content {
         top.setOpaque(true);
         top.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 
-        // Back Button
-        JButton back = new JButton();
-        ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
-        back.setIcon(backimg);
-        int backWidth = 60; // Example width
-        int adminHeight = 60; // Example height
-        ImageIcon scaledexit = new ImageIcon(backimg.getImage().getScaledInstance(backWidth, adminHeight, java.awt.Image.SCALE_SMOOTH));
-        back.setIcon(scaledexit);
-        back.setBounds(10, 20, backWidth, adminHeight);
-        back.setBorderPainted(false);
-        back.setBackground(new Color(13,31,51));
-        back.setBorder(BorderFactory.createEmptyBorder());
-        back.setOpaque(false);
-        back.setContentAreaFilled(false);
-        back.addActionListener(e->{
-            frame.dispose();
-            Main.Lesson(s_Id);
-        });
-
         //Quiz Button
         
         JButton Quiz = new JButton();
@@ -79,7 +60,6 @@ public class content {
         JLayeredPane panel = new JLayeredPane();
         panel.setBackground(Color.WHITE); // Set background color to white
         panel.setBounds(0, 0, 1080, 720);
-        panel.add(back, JLayeredPane.DEFAULT_LAYER);
         panel.add(Quiz, JLayeredPane.DEFAULT_LAYER);
         panel.add(top, JLayeredPane.DEFAULT_LAYER);
         panel.add(scrollPane, JLayeredPane.DEFAULT_LAYER);
