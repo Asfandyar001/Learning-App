@@ -47,21 +47,6 @@ public class content {
             Main.Lesson(s_Id);
         });
 
-        // Audio Button
-        JButton audio = new JButton();
-        ImageIcon audioimg = new ImageIcon("Learning System\\DBS Project\\Images\\Audio_Icon.png");
-        audio.setIcon(audioimg);
-        int audioWidth = 60; // Example width
-        int audioHeight = 60; // Example height
-        ImageIcon scaledaudio = new ImageIcon(audioimg.getImage().getScaledInstance(audioWidth, audioHeight, java.awt.Image.SCALE_SMOOTH));
-        audio.setIcon(scaledaudio);
-        audio.setBounds(970, 20, audioWidth, audioHeight);
-        audio.setBorderPainted(false);
-        audio.setBackground(new Color(13,31,51));
-        audio.setBorder(BorderFactory.createEmptyBorder());
-        audio.setOpaque(false);
-        audio.setContentAreaFilled(false);
-
         //Quiz Button
         
         JButton Quiz = new JButton();
@@ -94,7 +79,6 @@ public class content {
         JLayeredPane panel = new JLayeredPane();
         panel.setBackground(Color.WHITE); // Set background color to white
         panel.setBounds(0, 0, 1080, 720);
-        panel.add(audio, JLayeredPane.DEFAULT_LAYER);
         panel.add(back, JLayeredPane.DEFAULT_LAYER);
         panel.add(Quiz, JLayeredPane.DEFAULT_LAYER);
         panel.add(top, JLayeredPane.DEFAULT_LAYER);

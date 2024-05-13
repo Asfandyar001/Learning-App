@@ -10,7 +10,6 @@ import java.sql.*;
 public class Main {
     public static void main(String[] args)
     {
-
        MainScreen();
     //    lessonSearchPage();
     //    ReportGenerator rg=new ReportGenerator();
@@ -979,7 +978,7 @@ public class Main {
 
         // OptionScreen Image
         JLabel label1 = new JLabel();
-        ImageIcon AdminLog = new ImageIcon("Learning System\\DBS Project\\Images\\Admin_Enter.png");
+        ImageIcon AdminLog = new ImageIcon("Learning System\\DBS Project\\Images\\Admin_Enter3.png");
         label1.setIcon(AdminLog);
         // Adjust the size of the icon based on label size
         int labelWidth = 1080; // Example width
@@ -1015,7 +1014,7 @@ public class Main {
             AdminLogIn();
         });
 
-         // add Button
+         // addUser Button
         JButton addButton = new JButton();
         addButton.setBounds(101,255,130,50);
         addButton.setFocusable(false);
@@ -1029,10 +1028,24 @@ public class Main {
             
         });
 
+        //add Lesson
+        JButton addLessonButton = new JButton();
+        addLessonButton.setBounds(101,440,130,50);
+        addLessonButton.setFocusable(false);
+        addLessonButton.setOpaque(false);
+        addLessonButton.setContentAreaFilled(false);
+        addLessonButton.setBorderPainted(false);
+
+        addLessonButton.addActionListener(e->{
+            option.dispose();
+            addLesson();
+        });
+
         JLayeredPane Panel_option = new JLayeredPane();
         Panel_option.setBounds(0, 0, 1080, 720);
 
         Panel_option.add(addButton);
+        Panel_option.add(addLessonButton);
         Panel_option.add(back);
         Panel_option.add(label1);
 
@@ -1235,7 +1248,32 @@ public class Main {
             }
         });
 
-        // addStudent Button
+
+        //Text Field of GuardianId
+        JTextField GuardianId = new JTextField();
+        GuardianId.setPreferredSize(new Dimension(175,40));
+        GuardianId.setFont(new Font("Inter",Font.BOLD,20));
+        GuardianId.setForeground(new Color(0,0,0));
+        GuardianId.setBounds(105, 550, 220, 40); // Adjusted position
+        GuardianId.setBorder(null); // Remove border
+
+        //Text Field of GuardianName
+        JTextField GuardianName = new JTextField();
+        GuardianName.setPreferredSize(new Dimension(175,40));
+        GuardianName.setFont(new Font("Inter",Font.BOLD,20));
+        GuardianName.setForeground(new Color(0,0,0));
+        GuardianName.setBounds(437, 550, 220, 40); // Adjusted position
+        GuardianName.setBorder(null); // Remove border
+
+        //Text Field of GuardianPassword
+        JTextField GuardianPass = new JTextField();
+        GuardianPass.setPreferredSize(new Dimension(175,40));
+        GuardianPass.setFont(new Font("Inter",Font.BOLD,20));
+        GuardianPass.setForeground(new Color(0,0,0));
+        GuardianPass.setBounds(104, 655, 220, 40); // Adjusted position
+        GuardianPass.setBorder(null); // Remove border
+        
+        // addParent Button
         JButton add_Parent_Button = new JButton();
         add_Parent_Button.setBounds(810,645,125,45);
         add_Parent_Button.setFocusable(false);
@@ -1244,7 +1282,69 @@ public class Main {
         add_Parent_Button.setBorderPainted(false);
 
         add_Parent_Button.addActionListener(e->{
+            if(GuardianId.getText().isEmpty() || GuardianName.getText().isEmpty() || GuardianPass.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(addUser,"Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                DB c = new DB();
+                String url = c.geturl();
+                ArrayList<String> guardianids = new ArrayList<>();
+                try {
+                    Connection conn = DriverManager.getConnection(url);
+    
+                    Statement stmt2 = conn.createStatement();
+                    ResultSet rs2 = stmt2.executeQuery("Select * from Guardian");
+                    while (rs2.next()) {
+                        guardianids.add(rs2.getString(1));
+                    }
+    
+                    rs2.close();
+                    stmt2.close();
+    
+                    conn.close();
+                } catch (SQLException f) {
+                    f.printStackTrace();
+                }
 
+                boolean found2 = false;
+
+            for(int i=0; i<guardianids.size();i++)
+            {
+                if(guardianids.get(i).equals(GuardianId.getText()))
+                {
+                    found2 = true;
+                    break;
+                }
+            }
+            
+            if(found2 == true)
+            {
+                JOptionPane.showMessageDialog(addUser,"Guardian ID already Exist.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                try {
+                    Connection conn2 = DriverManager.getConnection(url);
+                    String sql = "insert into Guardian([Guardian ID],[Guardian Name],[Password]) values (?,?,?)";
+                    PreparedStatement preparedStatement = conn2.prepareStatement(sql);
+                    preparedStatement.setInt(1, Integer.parseInt(GuardianId.getText()));
+                    preparedStatement.setString(2, GuardianName.getText());
+                    preparedStatement.setString(3, GuardianPass.getText());
+                    preparedStatement.executeUpdate();
+
+                    preparedStatement.close();
+                    conn2.close();
+
+                    JOptionPane.showMessageDialog(addUser,"New Guardian Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                } catch (SQLException f) {
+                    f.printStackTrace();
+                }
+
+            }
+
+            }
         });
 
         JLayeredPane Panel_addUser = new JLayeredPane();
@@ -1257,6 +1357,237 @@ public class Main {
         Panel_addUser.add(StudentPass);
         Panel_addUser.add(StudentGuardian);
         Panel_addUser.add(StudentSection);
+        Panel_addUser.add(GuardianId);
+        Panel_addUser.add(GuardianName);
+        Panel_addUser.add(GuardianPass);
+        Panel_addUser.add(back);
+        Panel_addUser.add(label1);
+
+        addUser.add(Panel_addUser);
+        addUser.setLayout(null);
+        addUser.setVisible(true);
+    }
+
+    public static void addLesson()
+    {
+        JFrame addUser = new JFrame();
+        addUser.setSize(1080, 720); // set frame size
+        addUser.setTitle("Learning App"); // set frame title
+        addUser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // on cross close
+        addUser.setResizable(false); // disable frame resizing
+        addUser.setUndecorated(true);
+        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        // Calculate the center point
+        int centerX = (screenSize.width - addUser.getWidth()) / 2;
+        int centerY = (screenSize.height - addUser.getHeight()) / 2;
+        // Set the frame's location
+        addUser.setLocation(centerX, centerY);
+
+        // OptionScreen Image
+        JLabel label1 = new JLabel();
+        ImageIcon useradd = new ImageIcon("Learning System\\DBS Project\\Images\\Add Lesson1.png");
+        label1.setIcon(useradd);
+        // Adjust the size of the icon based on label size
+        int labelWidth = 1080; // Example width
+        int labelHeight = 720; // Example height
+        ImageIcon scaledAdminLog = new ImageIcon(useradd.getImage().getScaledInstance(labelWidth, labelHeight, java.awt.Image.SCALE_SMOOTH));
+        label1.setIcon(scaledAdminLog);
+        label1.setBounds(0, 0, labelWidth, labelHeight); // Set bounds for label2
+
+
+        // Back Button
+        JButton back = new JButton();
+        ImageIcon backimg = new ImageIcon("Learning System\\DBS Project\\Images\\Back.png");
+        back.setIcon(backimg);
+
+        // Adjust the size of the back icon based on label size
+        int backWidth = 75; // Example width
+        int adminHeight = 75; // Example height
+        ImageIcon scaledexit = new ImageIcon(backimg.getImage().getScaledInstance(backWidth, adminHeight, java.awt.Image.SCALE_SMOOTH));
+        back.setIcon(scaledexit);
+
+        back.setBounds(10, 10, backWidth, adminHeight);
+        back.setBorderPainted(false);
+        back.setBackground(new Color(13,31,51));
+        // Remove border
+        back.setBorderPainted(false);
+
+        // Set transparent background
+        back.setOpaque(false);
+        back.setContentAreaFilled(false);
+        back.setBorder(BorderFactory.createEmptyBorder());
+        back.addActionListener(e->{
+            addUser.dispose();
+            option_screen();
+        });
+
+        //Text Field of LessonName
+        JTextField LessonName = new JTextField();
+        LessonName.setPreferredSize(new Dimension(175,40));
+        LessonName.setFont(new Font("Inter",Font.BOLD,20));
+        LessonName.setForeground(new Color(0,0,0));
+        LessonName.setBounds(30, 229, 270, 40); // Adjusted position
+        LessonName.setBorder(null); // Remove border
+
+        //Text Field of LessonSection
+        JTextField LessonSection = new JTextField();
+        LessonSection.setPreferredSize(new Dimension(175,40));
+        LessonSection.setFont(new Font("Inter",Font.BOLD,20));
+        LessonSection.setForeground(new Color(0,0,0));
+        LessonSection.setBounds(490, 227, 270, 40); // Adjusted position
+        LessonSection.setBorder(null); // Remove border
+
+        //Text Field of LessonDescription
+        JTextField LessonDescription = new JTextField();
+        LessonDescription.setPreferredSize(new Dimension(175,40));
+        LessonDescription.setFont(new Font("Inter",Font.BOLD,20));
+        LessonDescription.setForeground(new Color(0,0,0));
+        LessonDescription.setBounds(30, 367, 270, 40); // Adjusted position
+        LessonDescription.setBorder(null); // Remove border
+
+        //Text Field of cr
+        JTextField cr = new JTextField();
+        cr.setPreferredSize(new Dimension(175,40));
+        cr.setFont(new Font("Inter",Font.BOLD,20));
+        cr.setForeground(new Color(0,0,0));
+        cr.setBounds(490, 367, 40, 40); // Adjusted position
+        cr.setBorder(null); // Remove border
+
+        //Text Field of cg
+        JTextField cg = new JTextField();
+        cg.setPreferredSize(new Dimension(175,40));
+        cg.setFont(new Font("Inter",Font.BOLD,20));
+        cg.setForeground(new Color(0,0,0));
+        cg.setBounds(550, 367, 40, 40); // Adjusted position
+        cg.setBorder(null); // Remove border
+
+        //Text Field of cb
+        JTextField cb = new JTextField();
+        cb.setPreferredSize(new Dimension(175,40));
+        cb.setFont(new Font("Inter",Font.BOLD,20));
+        cb.setForeground(new Color(0,0,0));
+        cb.setBounds(606, 367, 40, 40); // Adjusted position
+        cb.setBorder(null); // Remove border
+
+
+        JTextArea content = new JTextArea();
+        content.setFont(new Font("Inter", Font.BOLD, 20));
+        content.setForeground(new Color(0, 0, 0));
+        content.setLineWrap(true); // Enable text wrapping
+        content.setWrapStyleWord(true); // Wrap at word boundaries
+        JScrollPane scrollPane = new JScrollPane(content); // Add a scroll pane for long content
+        scrollPane.setBounds(23, 500, 925, 190); // Adjusted position
+
+
+         // addQuiz Button
+         JButton add_Quiz_Button = new JButton();
+         add_Quiz_Button.setBounds(940,225,115,80);
+         add_Quiz_Button.setFocusable(false);
+        add_Quiz_Button.setOpaque(false);
+        add_Quiz_Button.setContentAreaFilled(false);
+        add_Quiz_Button.setBorderPainted(false);
+ 
+        DB d = new DB();
+            String url = d.geturl();
+         add_Quiz_Button.addActionListener(e->{
+            if(LessonName.getText().isEmpty() || LessonDescription.getText().isEmpty() || LessonSection.getText().isEmpty() || content.getText().isEmpty() || cr.getText().isEmpty() || cg.getText().isEmpty() || cb.getText().isEmpty())
+            {
+                JOptionPane.showMessageDialog(addUser,"Please fill in all the fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+
+                ArrayList<String> lessons = new ArrayList<>();
+        try{
+            Connection conn = DriverManager.getConnection(url);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select * from Lesson");
+
+            if(rs.next())
+            {
+                lessons.add(rs.getString(2));
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+        }
+        catch(SQLException f){
+            f.printStackTrace();
+        }
+        boolean istrue = false;
+
+        for(int i=0; i<lessons.size(); i++)
+        {
+            if(lessons.get(i).equals(LessonName.getText()))
+            {
+                JOptionPane.showMessageDialog(addUser,"Lessons Already Exist.", "Error", JOptionPane.ERROR_MESSAGE);
+                istrue = true;
+                break;
+            }
+        }
+
+        if(istrue == false)
+        {
+            DB d2 = new DB();
+            String url2 = d.geturl();
+            int count = 0;
+            try
+            {Connection conn = DriverManager.getConnection(url2);
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("Select COUNT([Lesson ID]) ID from Lesson");
+
+            if(rs.next())
+            {
+                count=rs.getInt(1);
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+        }
+        catch(SQLException f)
+        {
+            f.printStackTrace();
+        }
+            try {
+                Connection conn2 = DriverManager.getConnection(url);
+                String sql = "insert into Lesson([Lesson ID],[Lesson Name],[Lesson Description],[Lesson Content],cr,cg,cb,Section) values (?,?,?,?,?,?,?,?)";
+                PreparedStatement preparedStatement = conn2.prepareStatement(sql);
+                preparedStatement.setInt(1, count+1);
+                preparedStatement.setString(2, LessonName.getText()); // student_name
+                preparedStatement.setString(3, LessonDescription.getText());
+                preparedStatement.setString(4, content.getText());
+                preparedStatement.setInt(5, Integer.parseInt(cr.getText()));
+                preparedStatement.setInt(6, Integer.parseInt(cg.getText()));
+                preparedStatement.setInt(7, Integer.parseInt(cb.getText()));
+                preparedStatement.setString(8, LessonSection.getText());
+                preparedStatement.executeUpdate();
+
+                preparedStatement.close();
+                conn2.close();
+
+                JOptionPane.showMessageDialog(addUser,"New Lesson Added.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            } catch (SQLException f) {
+                f.printStackTrace();
+            }
+        }
+            }
+         });
+             
+
+        JLayeredPane Panel_addUser = new JLayeredPane();
+        Panel_addUser.setBounds(0, 0, 1080, 720);
+
+        Panel_addUser.add(LessonName);
+        Panel_addUser.add(LessonDescription);
+        Panel_addUser.add(LessonSection);
+        Panel_addUser.add(cr);
+        Panel_addUser.add(cg);
+        Panel_addUser.add(cb); 
+        Panel_addUser.add(add_Quiz_Button); 
+        Panel_addUser.add(scrollPane); 
         Panel_addUser.add(back);
         Panel_addUser.add(label1);
 
